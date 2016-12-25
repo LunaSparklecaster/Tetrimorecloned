@@ -27,8 +27,13 @@ game_space = [[0 for a in range(20)] for b in range(20)]
 
 game_space[1][1] = 4
 
-boolean = check_free('square', (0,0), 0, game_space=game_space)
+boolean = check_free('square', (0, 0), 0, game_space=game_space)
+print(boolean, ': should be false because one of the squares is a 4!')
 
-print(boolean) # should be false because one of the squares is a 4!
+boolean = check_free('square', (2, 2), 0, game_space=game_space)
+print(boolean, ': should be true because all of the squares are 0!')
+
+boolean = check_free('square', (20, 20), 0, game_space=game_space)
+# should crash; do you know why? :D
 
 print(game_space)
