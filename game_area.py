@@ -58,12 +58,15 @@ def coords_to_check(type, center_location, rotation):
         offsets = []  # todo
     if type == 'right_zig':
         offsets = []  # todo
+    if type == 'tee':
+        offsets = []  # todo
+        
 
     offsets = rotate_offsets(offsets, rotation)
     for i in offsets:
         coords.append((center_location[0] + offsets[i][0], center_location[1] + offsets[i][1]))
     return coords
-        
+
 
 # testing the function we just built
 game_space = [[0 for a in range(10)] for b in range(22)]
