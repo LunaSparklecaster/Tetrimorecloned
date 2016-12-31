@@ -23,14 +23,15 @@ def coords_to_check(type, center_location, rotation):
     coordinate_list = []
     # todo: dictionary-ify
     # T shape is shaped like a T with the middle post down, center might be on post in this version or on middle
-    # I piece/stick is safe to shift depending on how we handle collision
-    shape_lookup = {'square': [[0, 0], [0, 1], [1, 0], [1, 1]],
-                    'stick': [[-1, 0], [0, 0], [1, 0], [2, 0]],
-                    'Tee':[],
-                    'S_shap':[],
-                    'Z_shap':[],
-                    'L_shap':{},
-                    'J_shap':(),}
+    # I piece/stick is safe to shift depending on how we handle collisionn
+    # O is square, I is stick. played some tetris and remembered the names.
+    shape_lookup = {'O_shape': [[0, 0], [0, 1], [1, 0], [1, 1]],
+                    'I_shape': [[-1, 0], [0, 0], [1, 0], [2, 0]],
+                    'T_shape':[[-1,0],[0,0],[1,0],[0,1]],
+                    'S_shape':[[0,0],[1,0],[-1,1],[0,1]],
+                    'Z_shape':[[-1,0],[0,0],[0,1],[1,1]],
+                    'L_shape':[[0,-1],[0,0],[0,1],[1,1]],
+                    'J_shape':[[0,-1],[0,0],[0,1],[1,-1]]}
     offsets = shape_lookup[type]
 
     offsets = rotate_offsets(offsets, rotation)
@@ -43,7 +44,7 @@ def coords_to_check(type, center_location, rotation):
 # 10 wide 20 high playing field, outer 2 walls on sides are wall checks and top 2 are death zone
 # TODO pieces should spawn under dead zone. check top of screen failstate.
 game_space = [[0 for a in range(22)] for b in range(14)]
-coords = coords_to_check('square', (4, 12), 2)
+coords = coords_to_check('O_shape', (4, 12), 2)
 free = minimal_check_free(coord_list=coords, game_space=game_space)
 assert free is True
 
