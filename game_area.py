@@ -38,8 +38,15 @@ def coords_to_check(type, center_location, rotation):
     for i in range(len(offsets)):
         coordinate_list.append((center_location[0] + offsets[i][0], center_location[1] + offsets[i][1]))
     return coordinate_list
-
-
+def wallmaker(game_space):
+    #takes in game_space, changes walls to a value so they're not free
+    return spacewalls
+def wallcheck(center,shape_type, rotation, game_space):
+    pass
+    #I guess it would take game space, check if shape post-rotation is intersecting wall and push it out
+    # check is free several times till it finds position the piece fits in?
+    #maybe not needed if a general check free is expanded?
+    return #return... coords of where piece should be
 # testing the function we just built
 # 10 wide 20 high playing field, outer 2 walls on sides are wall checks and top 2 are death zone
 # TODO pieces should spawn under dead zone. check top of screen failstate.
@@ -48,7 +55,7 @@ coords = coords_to_check('O_shape', (4, 12), 2)
 free = minimal_check_free(coord_list=coords, game_space=game_space)
 assert free is True
 
-
+print(game_space)
 # todo: add "walls" by initializing the outer edges of the data structure to non-zero values
 # this will let our code check the existing areas w/o modification, and will always prevent going through walls.
 #so data set 2 wider for wall checks since the I piece is the only one to occupy 2 spaces away from center.
