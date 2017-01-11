@@ -21,7 +21,7 @@ def rotate_offsets(offsets, rotation):
 
 def coords_to_check(type, center_location, rotation):
     coordinate_list = []
-    # todo: dictionary-ify
+    #
     # T shape is shaped like a T with the middle post down, center might be on post in this version or on middle
     # I piece/stick is safe to shift depending on how we handle collisionn
     # O is square, I is stick. played some tetris and remembered the names.
@@ -40,7 +40,12 @@ def coords_to_check(type, center_location, rotation):
     return coordinate_list
 def wallmaker(game_space):
     #takes in game_space, changes walls to a value so they're not free
-    return spacewalls
+    for wallvalone in range(0, 22):
+        for wallvaltwo in range(0, 2):
+            game_space[wallvalone][wallvaltwo] = 7
+        for wallvaltwo in range(12, 14):
+            game_space[wallvalone][wallvaltwo] = 7
+    return game_space
 def wallcheck(center,shape_type, rotation, game_space):
     pass
     #I guess it would take game space, check if shape post-rotation is intersecting wall and push it out
@@ -50,10 +55,20 @@ def wallcheck(center,shape_type, rotation, game_space):
 # testing the function we just built
 # 10 wide 20 high playing field, outer 2 walls on sides are wall checks and top 2 are death zone
 # TODO pieces should spawn under dead zone. check top of screen failstate.
-game_space = [[0 for a in range(22)] for b in range(14)]
+# I rebuilt the numbers by flipping which one was which, but I forgot if that broke something
+game_space = [[0 for a in range(14)] for b in range(22)]
 coords = coords_to_check('O_shape', (4, 12), 2)
 free = minimal_check_free(coord_list=coords, game_space=game_space)
-assert free is True
+#game_space[12][4]=2
+## initialize walls
+game_space = wallmaker(game_space)
+
+            #hack
+    #game_space[pupper][0] = 3
+    #game_space[pupper][1] = 3
+    #game_space[pupper][12] = 3
+    #game_space[pupper][13] = 3
+#assert free is True
 
 print(game_space)
 # todo: add "walls" by initializing the outer edges of the data structure to non-zero values
