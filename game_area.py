@@ -1,3 +1,9 @@
+
+####game area vals
+g_area_wide = 14
+g_area_height = 22
+g_area_wallsize = 2
+
 def minimal_check_free(coord_list, game_space):
     is_free = True
     for x, y in coord_list:
@@ -40,10 +46,10 @@ def coords_to_check(type, center_location, rotation):
     return coordinate_list
 def wallmaker(game_space):
     #takes in game_space, changes walls to a value so they're not free
-    for wallvalone in range(0, 22):
-        for wallvaltwo in range(0, 2):
+    for wallvalone in range(0, g_area_height):
+        for wallvaltwo in range(0, g_area_wallsize):
             game_space[wallvalone][wallvaltwo] = 7
-        for wallvaltwo in range(12, 14):
+        for wallvaltwo in range(g_area_wide - g_area_wallsize, g_area_wide):
             game_space[wallvalone][wallvaltwo] = 7
     return game_space
 def wallcheck(center,shape_type, rotation, game_space):
@@ -56,7 +62,7 @@ def wallcheck(center,shape_type, rotation, game_space):
 # 10 wide 20 high playing field, outer 2 walls on sides are wall checks and top 2 are death zone
 # TODO pieces should spawn under dead zone. check top of screen failstate.
 # I rebuilt the numbers by flipping which one was which, but I forgot if that broke something
-game_space = [[0 for a in range(14)] for b in range(22)]
+game_space = [[0 for a in range(g_area_wide)] for b in range(g_area_height)]
 coords = coords_to_check('O_shape', (4, 12), 2)
 free = minimal_check_free(coord_list=coords, game_space=game_space)
 #game_space[12][4]=2
